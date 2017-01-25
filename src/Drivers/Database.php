@@ -41,6 +41,13 @@ class Database extends AbstractDriver
         // Created at stamp
         $created = new DateTime('now');
 
+        // There should never be an exchange rate of 0 because this will cause 
+        // division by zero errors
+        if ( ! $params['exchange_rate'])
+        {
+            $params['exchange_rate'] = 1;
+        }
+
         $params = array_merge([
             'name' => '',
             'code' => '',
